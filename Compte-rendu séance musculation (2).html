@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte-Rendu Séance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a2e;
+            color: #e8e8e8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #8b9aee;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .date {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 0.9rem;
+        }
+
+        .tip-box {
+            background: rgba(102, 126, 234, 0.08);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tip-box:nth-child(odd) {
+            background: rgba(102, 126, 234, 0.08);
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.15);
+        }
+
+        .tip-box:nth-child(even) {
+            background: rgba(236, 72, 153, 0.08);
+            border-color: rgba(236, 72, 153, 0.3);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.15);
+        }
+
+        .tip-box:nth-child(3n) {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+        }
+
+        .tip-box:hover {
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tip-title {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(102, 126, 234, 0.4);
+        }
+
+        .tip-content {
+            color: #d5d5d5;
+            font-size: 0.95rem;
+        }
+
+        .tip-content ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .tip-content li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            color: #8b9aee;
+            font-weight: 600;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, transparent 100%);
+            border-left: 3px solid #667eea;
+            padding: 15px 20px;
+            margin: 30px 0 20px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .section-header h2 {
+            color: #667eea;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .diagram {
+            background: rgba(118, 75, 162, 0.1);
+            border: 1px solid rgba(118, 75, 162, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .diagram-title {
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .diagram-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .diagram-item {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .diagram-label {
+            color: #a08dd1;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .diagram-desc {
+            color: #b5b5b5;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .arrow {
+            color: #764ba2;
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 40px;
+            box-shadow: 0 0 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .summary-box h2 {
+            color: #8b9aee;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.4rem;
+            text-shadow: 0 0 15px rgba(139, 154, 238, 0.4);
+        }
+
+        .summary-box ul {
+            list-style: none;
+        }
+
+        .summary-box li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+            color: #d0d0d0;
+        }
+
+        .summary-box li:last-child {
+            border-bottom: none;
+        }
+
+        .summary-box li:before {
+            content: "→ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+            }
+        }
+
+        .note {
+            background: rgba(255, 193, 7, 0.05);
+            border-left: 3px solid #ffc107;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+            color: #d0d0d0;
+            font-size: 0.9rem;
+        }
+
+        .exercise-image {
+            width: 100%;
+            max-width: 400px;
+            height: 200px;
+            border-radius: 10px;
+            margin: 15px auto;
+            display: block;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .tip-box {
+                padding: 15px;
+            }
+            
+            .section-header h2 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💪 Compte-Rendu de Séance</h1>
+        <div class="subtitle">Mathieu</div>
+        <div class="date">13 février 2026</div>
+
+        <div class="section-header">
+            <h2>🎯 Astuce Globale - Comprendre le Travail du Dos</h2>
+        </div>
+
+        <div class="diagram">
+            <div class="diagram-title">Deux Façons de Travailler le Dos</div>
+            <div class="diagram-content">
+                <div class="diagram-item">
+                    <div class="diagram-label">📏 ÉPAISSEUR</div>
+                    <div class="diagram-desc">
+                        ✓ Ouvrir les coudes<br>
+                        ✓ Rétracter les omoplates<br>
+                        ✓ Ramener vers soi
+                    </div>
+                </div>
+                <div class="diagram-item">
+                    <div class="diagram-label">📐 LARGEUR</div>
+                    <div class="diagram-desc">
+                        ✓ Coudes près du corps<br>
+                        ✓ Ne PAS rétracter les omoplates<br>
+                        ✓ Focus grand dorsal
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <h2>📋 Exercices à Améliorer</h2>
+        </div>
+
+        <div class="tip-box">
+            <div class="tip-title">Développé Incliné Smith Machine</div>
+            <img src="developpe-incline.svg" alt="Développé incliné" class="exercise-image">
+            <div class="tip-content">
+                <ul>
+                    <li>✓ Ton mouvement reste <span class="highlight">plutôt correct</span>, c'est cool !</li>
+                    <li>Continue de bien garder tes <span class="highlight">omoplates serrées</span> et tes épaules contre le banc</li>
+                    <li>Si tu sens trop tes épaules → <span class="highlight">descends pas aussi bas</span>, c'est ok</li>
+                    <li>⚠️ N'oublie pas de <span class="highlight">monter le poids progressivement</span> (t'es encore loin de l'échec là)</li>
+                    <li>Mais attention à pas dégrader le mouvement quand tu augmentes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <div class="tip-title">Tirage Vertical</div>
+            <img src="tirage-vertical.svg" alt="Tirage vertical" class="exercise-image">
+            <div class="tip-content">
+                <ul>
+                    <li>Essaye de le faire <span class="highlight">sur la poulie à côté de la Smith Machine</span>, tu pourras peut-être bloquer un peu mieux tes jambes</li>
+                    <li>⚠️ <span class="highlight">Courbe pas le dos</span>, c'est important</li>
+                    <li>⚠️ <span class="highlight">Rétracte pas les omoplates</span> (on travaille la largeur, rappelle-toi !)</li>
+                    <li>Tes coudes doivent se <span class="highlight">rapprocher de ton corps</span></li>
+                    <li>Focus max sur la <span class="highlight">connexion cerveau-muscle</span>, ressens bien</li>
+                    <li>Monte le poids petit à petit pour te rapprocher de l'échec</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <div class="tip-title">Écarté à la Poulie</div>
+            <img src="ecarte-poulie.svg" alt="Écarté à la poulie" class="exercise-image">
+            <div class="tip-content">
+                <ul>
+                    <li>Fais-le en <span class="highlight">bilatéral</span> (sur les deux) → j'ai vu que ta coordination était meilleure comme ça</li>
+                    <li>⚠️ <span class="highlight">Surtout ne plie PAS les bras</span> (sinon ça engage trop les biceps)</li>
+                    <li>Garde ta cage thoracique bien <span class="highlight">ouverte</span></li>
+                    <li>Tes épaules restent <span class="highlight">fixées en arrière</span></li>
+                    <li>C'est vraiment tes <span class="highlight">coudes qui se rapprochent</span> entre eux, rien d'autre</li>
+                    <li>💡 Fais-le devant le miroir si possible, ça t'aidera grave</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <div class="tip-title">Rowing Bûcheron</div>
+            <img src="rowing-bucheron.svg" alt="Rowing bûcheron" class="exercise-image">
+            <div class="tip-content">
+                <ul>
+                    <li>Tu peux le faire soit au banc, soit garder la variante qu'on a choisie ensemble</li>
+                    <li>⚠️ Ton <span class="highlight">épaule doit rester fixe</span>, c'est crucial</li>
+                    <li>C'est ton <span class="highlight">coude qui part en haut</span>, pas ton corps</li>
+                    <li>⚠️ <span class="highlight">Pas de rotation du buste</span> surtout</li>
+                    <li>Vraiment, l'épaule ne doit pas bouger du tout</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <div class="tip-title">Chest Press</div>
+            <img src="chest-press.svg" alt="Chest press" class="exercise-image">
+            <div class="tip-content">
+                <ul>
+                    <li>Fixe bien tes <span class="highlight">épaules sur le banc</span></li>
+                    <li>⚠️ Tes épaules ne doivent pas bouger du tout</li>
+                    <li>Si tes épaules se décollent → <span class="highlight">c'est que tu vas trop loin</span> sur le mouvement</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <div class="tip-title">Tirage Horizontal</div>
+            <img src="tirage-horizontal.svg" alt="Tirage horizontal" class="exercise-image">
+            <div class="tip-content">
+                <div class="note">ℹ️ C'était le dernier exo de la séance</div>
+                <ul>
+                    <li>Prends une <span class="highlight">prise neutre</span> (paumes face à face)</li>
+                    <li>Objectif : bien cibler ton <span class="highlight">grand dorsal</span></li>
+                    <li>Fais gaffe à ce que ton <span class="highlight">coude se rapproche</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <h2>✨ Compte-Rendu Global</h2>
+            <ul>
+                <li>Tes mouvements vont s'améliorer <span class="highlight">petit à petit avec la pratique</span>, t'inquiète pas</li>
+                <li>Continue de bien garder tes <span class="highlight">épaules fixes</span> sur la plupart des exos</li>
+                <li>Utilise beaucoup plus ta <span class="highlight">connexion cerveau-muscle</span>, c'est la clé</li>
+                <li><span class="highlight">Monte le poids ou les reps</span> – te sous-estime pas !</li>
+                <li>Tes dernières répétitions doivent être <span class="highlight">beaucoup plus dures et plus lentes</span> que les premières</li>
+                <li>C'est ça qui montre que t'atteins vraiment l'échec ✅</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
